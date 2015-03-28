@@ -1,0 +1,56 @@
+
+CREATE TABLE `business` (
+  `bizid` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(45) DEFAULT NULL,
+  `Categoryid` int(11) DEFAULT NULL,
+  `ratings` float DEFAULT NULL,
+  `Zipcode` int(11) DEFAULT NULL,
+  `Contact` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`bizid`),
+  KEY `fk_categoryid` (`Categoryid`),
+  CONSTRAINT `fk_categoryid` FOREIGN KEY (`Categoryid`) REFERENCES `category` (`categoryid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
+CREATE TABLE `category` (
+  `categoryid` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryname` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`categoryid`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
+CREATE TABLE `customer` (
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
+CREATE TABLE `reviews` (
+  `reviewid` int(11) NOT NULL AUTO_INCREMENT,
+  `bizid` int(11) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `ratings` int(11) DEFAULT NULL,
+  `comment` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`reviewid`),
+  KEY `fk_userid` (`bizid`),
+  KEY `fk_bizid` (`bizid`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
+delimiter $$
+
+CREATE TABLE `users` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `firstname` varchar(15) DEFAULT NULL,
+  `lastname` varchar(45) DEFAULT NULL,
+  `zipcode` varchar(45) DEFAULT NULL,
+  `lastmodified` datetime DEFAULT NULL,
+  PRIMARY KEY (`userid`,`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1$$
